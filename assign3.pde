@@ -42,8 +42,8 @@ void setup(){
   slot = new int[nSlot][nSlot];
   
   sideLength = SLOT_SIZE * nSlot;
-  ix = (width - sideLength)/2; // initial x
-  iy = (height - sideLength)/2; // initial y
+  ix = int ((width - sideLength)/2); // initial x
+  iy = int ((height - sideLength)/2); // initial y
   
   gameState = GAME_START;
 }
@@ -56,7 +56,7 @@ void draw(){
           textFont(loadFont("font/Square_One.ttf"),24);
           fill(0);
           text("Choose # of bombs to continue:",10,width/3-24);
-          int spacing = width/9;
+          int spacing = int(width/9);
           for (int i=0; i<9; i++){
             fill(255);
             rect(i*spacing, width/3, spacing, 50);
