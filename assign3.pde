@@ -97,11 +97,10 @@ count = 0;
 
 for (int X=-1; X<2; X++) {                     
   for (int Y=-1; Y<2; Y++) {
-    if ( X != 0 && Y != 0 ) {
+    if(col+X>0 && col+X<4 && row+Y>0 && row+Y<4){
+      if( X != 0 && Y != 0 ) {
       continue;
-    }else {
-      if(col+X>0 && col+X<3 && row+Y>0 && row+Y<3){
-        if(slot[col+X][row+Y] == SLOT_SAFE){
+    } else if(slot[col+X][row+Y] == SLOT_SAFE){
         count = count;
         break;
         }else if(slot[col+X][row+Y] == SLOT_BOMB){
@@ -109,9 +108,7 @@ for (int X=-1; X<2; X++) {
         break;
       }
     }
-  }
-} 
-
+  } 
 }
 
 /*while(slot[col][row] == SLOT_SAFE){
