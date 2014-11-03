@@ -91,18 +91,49 @@ void draw(){
 
 int countNeighborBombs(int col,int row){
   // -------------- Requirement B ---------
-/*int count;
 
-if( slot[col][row] == SLOT_SAFE ){
- int i = col + random((-1),2) + 2;
- int j = row + random((-1),2) + 2;
- if ( slot[i][j] == SLOT_BOMB ){
-   println("q");
-   } 
- }*/
+int count;
+count = 0;
 
-  return 0;
+for (int X=-1; X<4; X++) {                     
+  for (int Y=-1; Y<4; Y++) {
+    if ( X != 0 && Y != 0 ) {
+      continue;
+    }else {
+      if(col+X>0 && col+X<4 && row+Y>0 && row+Y<4){
+        count = count;
+        if(slot[col+X][row+Y] == SLOT_SAFE){
+        count = count;
+        break;
+        }else if(slot[col+X][row+Y] == SLOT_BOMB){
+        count = count + 1;
+        break;
+      }
+    }
+  }
+} 
+
 }
+
+/*while(slot[col][row] == SLOT_SAFE){
+  int X = (int)random(-1,2);
+  int Y = (int)random(-1,2);
+  
+  if( X != 0 && Y != 0 ){
+    continue;
+    }else if(slot[col][row] == SLOT_BOMB){
+     
+      count = count + 1;
+     break;
+    }
+  }*/
+  
+  
+return count;
+}
+
+
+
 
 void setBombs(){
   // initial slot
