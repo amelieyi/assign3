@@ -95,13 +95,12 @@ int countNeighborBombs(int col,int row){
 int count;
 count = 0;
 
-for (int X=-1; X<4; X++) {                     
-  for (int Y=-1; Y<4; Y++) {
+for (int X=-1; X<2; X++) {                     
+  for (int Y=-1; Y<2; Y++) {
     if ( X != 0 && Y != 0 ) {
       continue;
     }else {
-      if(col+X>0 && col+X<4 && row+Y>0 && row+Y<4){
-        count = count;
+      if(col+X>0 && col+X<3 && row+Y>0 && row+Y<3){
         if(slot[col+X][row+Y] == SLOT_SAFE){
         count = count;
         break;
