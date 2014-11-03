@@ -42,8 +42,8 @@ void setup(){
   slot = new int[nSlot][nSlot];
   
   sideLength = SLOT_SIZE * nSlot;
-  ix = (width - sideLength)/2; // initial x
-  iy = (height - sideLength)/2; // initial y
+  ix = int((width - sideLength)/2); // initial x
+  iy = int((height - sideLength)/2); // initial y
   
   gameState = GAME_START;
 }
@@ -53,7 +53,7 @@ void draw(){
     case GAME_START:
           background(180);
           image(bg,0,0,640,480);
-          textSize(16);
+          textFont(loadFont("font/Square_One.ttf"),24);
           fill(0);
           text("Choose # of bombs to continue:",10,width/3-24);
           int spacing = width/9;
@@ -66,17 +66,23 @@ void draw(){
           // check mouseClicked() to start the game
           break;
     case GAME_RUN:
-          //---------------- put you code here ----
+//---------------- put you code here ----
+//mouse click > all safe
+//if slot off
+//if slot bomb
+//if slot safe
 
-          // -----------------------------------
+
+
+// -----------------------------------
           break;
     case GAME_WIN:
-          textSize(18);
+          textFont(loadFont("font/Square_One.ttf"),24);
           fill(0);
           text("YOU WIN !!",width/3,30);
           break;
     case GAME_LOSE:
-          textSize(18);
+          textFont(loadFont("font/Square_One.ttf"),24);
           fill(0);
           text("YOU LOSE !!",width/3,30);
           break;
@@ -85,6 +91,16 @@ void draw(){
 
 int countNeighborBombs(int col,int row){
   // -------------- Requirement B ---------
+/*int count;
+
+if( slot[col][row] == SLOT_SAFE ){
+ int i = col + random((-1),2) + 2;
+ int j = row + random((-1),2) + 2;
+ if ( slot[i][j] == SLOT_BOMB ){
+   println("q");
+   } 
+ }*/
+
   return 0;
 }
 
@@ -98,6 +114,23 @@ void setBombs(){
   // -------------- put your code here ---------
   // randomly set bombs
 
+//int bombCount >> while(i != 0) 
+
+
+int i = bombCount;
+while (i != 0){
+ int col = (int)random(0,4);
+ int row = (int)random(0,4);
+ 
+ if( slot[col][row] == SLOT_BOMB ){
+
+  continue; 
+ }else{
+   slot[col][row] = SLOT_BOMB;
+   i--;
+ }
+}
+    
   // ---------------------------------------
 }
 
@@ -175,7 +208,30 @@ void mousePressed(){
     
     // --------------- put you code here -------     
 
-    // -------------------------
+
+ int n = int(sideLength/nSlot);
+
+ int mouseCol = int((mouseX - ix) / n);
+ int mouseRow = int((mouseY - iy) / n);
+
+ if(slot[mouseCol][mouseRow] == SLOT_BOMB){
+   showSlot(mouseCol,mouseRow, SLOT_BOMB);
+   gameState = GAME_LOSE ;
+ }else{
+   showSlot(mouseCol,mouseRow, SLOT_SAFE);
+   clickCount = clickCount + 1;
+ }
+ if((int)clickCount == (int)totalSlots - (int)bombCount){
+   gameState = GAME_WIN ;
+ }
+ 
+
+
+
+
+
+
+    // ------------------------------------------
     
   }
 }
@@ -187,4 +243,3 @@ void keyPressed(){
      gameState = GAME_START;
   }
 }
-
